@@ -1,32 +1,34 @@
 <div class="entry-content-left">
   <div id="ha-youtube-link"></div>
-  <div style="display:none;" id='featured-img' class="smd-featured-img">
+    <div style="display:none;" id='featured-img' class="smd-featured-img">
   
-  {has_image}
-  <a href="#_EVENTIMAGEURL">
-  <img style="margin:auto;" src="#_EVENTIMAGEURL">
-  </a>
-  {/has_image}
-  {no_image}
-  <img style="margin:auto;" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png" alt="SJSU">
-  {/no_image}
+      {has_image}
+        <a href="#_EVENTIMAGEURL">
+          <img style="margin:auto;" src="#_EVENTIMAGEURL">
+        </a>
+      {/has_image}
+      {no_image}
+        <img style="margin:auto;" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png" alt="SJSU">
+      {/no_image}
+    </div>
   </div>
-  </div>
+
   <div class="smd-post-content" >
-  <h1>
-  #_EVENTNAME
-  </h1>
-  <p id="event-description">
-  #_EVENTNOTES
-  </p>
-  <p id="event-excerpt" style="font-size:1.2em">
-  #_EVENTEXCERPT{0, }
-  </p>
-  <p>
-  <div id="datetime-#_EVENTID" 
-  value="#_ATT{detailed_event_date_time}">
+    <h1>
+      #_EVENTNAME
+    </h1>
+    <p id="event-description">
+      #_EVENTNOTES
+    </p>
+    <p id="event-excerpt" style="font-size:1.2em">
+      #_EVENTEXCERPT
+    </p>
+    <p>
+    <div id="datetime-#_EVENTID" 
+    value="#_ATT{detailed_event_date_time}">
           <strong>Date/Time</strong> <br/>
   	Date(s) - #_EVENTDATES<br /><i>#_EVENTTIMES</i>
+  
   <script>
   (function () {
   var dateTimeEle = document.getElementById("datetime-#_EVENTID");
@@ -36,21 +38,7 @@
   </script>	
   </div>
   </p>
-  <!-- <p style="margin-bottom:0px;">
-  	<strong>Categories</strong>
-  	#_CATEGORIES
-  </p>
-  {has_location}
-  <p>
-  	<strong>Location</strong><br/>
-  	#_LOCATIONLINK <br/>
-          #_LOCATIONMAP
-  </p>
-  {/has_location}
-  <br style="clear:both" />
-  #_EVENTNOTES
-  
-  -->
+
   {has_bookings}
   <h3>Bookings</h3>
   #_BOOKINGFORM
