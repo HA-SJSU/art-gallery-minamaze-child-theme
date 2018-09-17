@@ -1,0 +1,76 @@
+<div class="entry-content-left">
+  <div id="ha-youtube-link"></div>
+    <div style="display:none;" id='featured-img' class="smd-featured-img">
+  
+      {has_image}
+        <a href="#_EVENTIMAGEURL">
+          <img style="margin:auto;" src="#_EVENTIMAGEURL">
+        </a>
+      {/has_image}
+      {no_image}
+        <img style="margin:auto;" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png" alt="SJSU">
+      {/no_image}
+    </div>
+  </div>
+
+  <div class="smd-post-content" >
+    <h1>
+      #_EVENTNAME
+    </h1>
+    <p id="event-description">
+      #_EVENTNOTES
+    </p>
+    <p id="event-excerpt" style="font-size:1.2em">
+      #_EVENTEXCERPT
+    </p>
+    <p>
+    <div id="datetime-#_EVENTID" 
+    value="#_ATT{detailed_event_date_time}">
+          <strong>Date/Time</strong> <br/>
+  	Date(s) - #_EVENTDATES<br /><i>#_EVENTTIMES</i>
+  
+  <script>
+  (function () {
+  var dateTimeEle = document.getElementById("datetime-#_EVENTID");
+  if(dateTimeEle.getAttribute("value") !== "") {
+         dateTimeEle.innerHTML = "<strong>Date/Time</strong><br/>" + dateTimeEle.getAttribute("value")+"<br/>";
+  }})();
+  </script>	
+  </div>
+  </p>
+
+  {has_bookings}
+  <h3>Bookings</h3>
+  #_BOOKINGFORM
+  {/has_bookings}
+  </div>
+  <script>
+  
+  if('#_ATT{Ovationtix Link}') { 
+          jQuery('#event-excerpt').append(EMHaCustom.generateTicketBtn({
+  	        attr_name: 'Ovationtix Link',
+  	        ticketLink: '#_ATT{Ovationtix Link}',
+  	        btnImgLink: 'http://events.ha.sjsu.edu/musicanddance/wp-content/uploads/sites/6/2016/09/BuyTickets_160px.png'
+  		}));
+  } else if('#_ATT{Ticket Link}' && '#_ATT{Ticket Link}' !== 'None') {
+          jQuery('#event-excerpt').append(EMHaCustom.generateTicketBtn({
+  	        attr_name: 'Ticket Link',
+  	        ticketLink: '#_ATT{Ticket Link}'
+  		}));
+  }
+  </script>
+  <script>
+  if('#_ATT{Youtube Link}'){
+  
+  
+  
+  jQuery('#ha-youtube-link').append(EMHaCustom.generateYoutubeLink({
+  	        attr_name: 'Youtube Link',
+  	        
+  	        youtubeLink: '#_ATT{Youtube Link}'
+  		}));
+  
+  }else{
+  document.getElementById('featured-img').style.display='block';
+  }
+  </script>
