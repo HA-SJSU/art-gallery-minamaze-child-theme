@@ -1,5 +1,6 @@
 <?php
   require_once('shortcodes.php');
+  require_once('Event-Grid-Class.php');
 
   /**
    * This allows the child theme to be intialized as well as loop through all the parent theme's css files
