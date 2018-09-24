@@ -1,28 +1,48 @@
 <?php
-function my_theme_enqueue_styles() {
+  require_once('shortcodes.php');
 
-    $parent_style = 'minamaze-style'; // This is 'twentyfifteen-style' for the Twenty Fifteen theme.
+  /**
+   * This allows the child theme to be intialized as well as loop through all the parent theme's css files
+   * to properly add the child theme style
+   */
+  function my_theme_enqueue_styles() : void {
 
-    wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
-    wp_enqueue_style( 'child-style',
-        get_stylesheet_directory_uri() . '/style.css',
-        array( $parent_style ),
-        wp_get_theme()->get('Version')
-    );
-}
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+      $parent_style = 'minamaze-style'; // This is 'twentyfifteen-style' for the Twenty Fifteen theme.
 
-function ha_custom_javascripts() {
-		echo '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
-		echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>';
-	  echo '<script src="' . get_stylesheet_directory_uri() . '/js/ha-custom.js"></script>' . "\n";
-	}
-	add_action( 'wp_head', 'ha_custom_javascripts' );
+      wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
+      wp_enqueue_style( 'child-style',
+          get_stylesheet_directory_uri() . '/style.css',
+          array( $parent_style ),
+          wp_get_theme()->get('Version')
+      );
+  }
+  add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
-function footer_javascripts() {
-  echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-slideshow.js"></script>' . "\n";
-}
-add_action( 'wp_footer', 'footer_javascripts' );
+
+
+  /**
+   * This will load the scripts at the header
+   */
+  function ha_custom_javascripts() : void {
+  		echo '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
+  		echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>';
+  	  echo '<script type="text/javascript" src="' . get_stylesheet_directory_uri() . '/js/ha-custom.js"></script>' . "\n";
+      echo '<script type="text/javascript" src="' . get_stylesheet_directory_uri() . '/js/test.js"></script>' . "\n";
+  	}
+  add_action( 'wp_head', 'ha_custom_javascripts' );
+
+
+  /**
+   * This will load the scripts at the footer
+   */
+  function footer_javascripts() : void {
+    //get_stylesheet_directory_uri() gets the directory of the childtheme at the root
+    echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-grid.js"></script>' . "\n";
+    if( is_front_page() or thinkup_check_ishome()) {
+      echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-slideshow.js"></script>' . "\n";
+    }
+  }
+  add_action( 'wp_footer', 'footer_javascripts' );
 
 
 
@@ -39,6 +59,24 @@ FUNCTIONS USED FOR THE SITE
 
 ========================================================================================================================================================================
 */
+
+/**
+  * This will return the array of past events
+  */
+function get_past_event_ids() {
+  $pastArray = array();
+  $events = EM_Events::get(
+    array(
+        'scope'=>'past'
+    ));
+    foreach($events as $key => $eventObjects) {
+      $ids[] = $eventObjects -> post_id;
+    }
+  return $ids;
+}
+
+
+
 
 /**
   * Returns an array of at most 3 future event sets if there are any
@@ -99,7 +137,7 @@ function get_future_event_ids(){
 * @param ids are the future ids
 * @return eventsArray hTML of the events
 */
-function get_Events_HTML($eventHTML,$ids){
+function get_Events_HTML($eventHTML,$ids) {
   $eventsArray = array();
   //This loop checks for 9 events
   for( $counter = 0; $counter < 3; $counter++ ) {
@@ -128,7 +166,7 @@ function get_Events_HTML($eventHTML,$ids){
   * Displays the upcoming events on the front page
   *
   */
-function upcoming_events(){
+function upcoming_events() : void {
 $startingdivs = <<< HTML
   <div class='slideshow-container'>
     <h1><i>UPCOMING EVENTS & EXHIBITIONS</i></h1>
@@ -206,39 +244,14 @@ $endingdivs ="</div>";
 
   $html = $startingdivs . $eventsHTML . $button . $endingdivs;
   echo $html;
-  echo '<script type="text/javascript">
-  let slideIndex = 1;
-  showSlides(slideIndex);// Next/previous controls
-  function nextSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  // Thumbnail image controls
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
-
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    if(slides != null) {
-      slides[slideIndex-1].style.display = "block";
-    }
-  }
-  </script>';
   }
 }
 
-/*
-This will display the social media buttons on the pre header of the site without using the ThinkUP fcunctions from the parent theme
-*/
-function social_media_buttons() {
+
+/**
+ * This will display the social media buttons on the pre header of the site without using the ThinkUP fcunctions from the parent theme
+ */
+function social_media_buttons(): void {
   echo '<div id="pre-header-social"><ul>';
 
  			/* Facebook settings */
@@ -264,15 +277,8 @@ function social_media_buttons() {
  		echo	'</ul></div>';
 }
 
-/*
-========================================================================================================================================================================
-SHORTCODES USED FOR THE SITE
 
 
-
-========================================================================================================================================================================
-*/
-add_shortcode("event_slideshow","upcoming_events");
 
 
 

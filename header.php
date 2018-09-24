@@ -80,7 +80,7 @@
 
 
 	<!-- Upcoming Events Section -->
-	<?php if (is_front_page() or thinkup_check_ishome() )/*Fetches Upcoming Events*/ upcoming_events(); ?>
+	<?php if (is_front_page() or thinkup_check_ishome() )/*Fetches Upcoming Events*/ upcoming_events();?>
 
 	<!-- Ending Upcoming Events Section -->
 
