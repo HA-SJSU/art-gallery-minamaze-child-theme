@@ -80,7 +80,8 @@
 
 
 	<!-- Upcoming Events Section -->
-	<?php if (is_front_page() or thinkup_check_ishome() )/*Fetches Upcoming Events*/ upcoming_events();?>
+	<?php if (is_front_page() or thinkup_check_ishome() ) echo display_event_slideshow();?>
+
 
 	<!-- Ending Upcoming Events Section -->
 
@@ -94,3 +95,4 @@
 		<?php /* Custom Intro */ thinkup_custom_intro(); ?>
 
 		<div id="main-core">
+			<?php if (is_front_page() or thinkup_check_ishome() ) /*Fetches PDF */ display_pdf(); ?>

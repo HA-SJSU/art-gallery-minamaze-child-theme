@@ -1,5 +1,9 @@
 <?php
-class EventGrid {
+require_once('EventInterface.php');
+/**
+ * This creates a grid to show in the Archives page
+ */
+class EventGrid implements Event {
   private $html;
   private $time;
   private $singleEventFormat;
@@ -9,29 +13,25 @@ class EventGrid {
    * @param string $time This will choose the timeline for the event
    */
   public function __construct($time = "past") {
-      $html = "";
+      $this->html = "";
       $this->time = strtolower($time);
-  }
+      $this->singleEventFormat = <<< HTML
 
-
-
-  /**
-   * This will set the event format for a single event
-   */
-  private function set_event_format() {
-    $singleEventFormat = <<< HTML
+      <!-- Add the formated single event html here -->
 
 HTML;
   }
 
 
 
+
+
   /**
    * This will return the event ids needed for extracting information
    * from EVENT MANAGER
-   * @return array Returns events ids of the selected
+   * @return array $ids Returns events ids of the selected
    */
-  public function get_event_ids() {
+  public function get_event_ids($time) {
     $pastArray = array();
     $events = EM_Events::get(
       array(
@@ -45,10 +45,25 @@ HTML;
 
 
 
+
   /**
-   * This will format the event
+   * Will return HTML format for the events
+   * @return string returns $html in stirng form
    */
-  private function form_event_html() : void {
+  public function get_event_html() {
+    $this->form_grid_html();
+    return $this->html;
+  }
+
+
+
+
+
+  /**
+   * This will format the event and render through the Event Manager Plugin
+   */
+  private function form_single_events_html() {
+    $ids[] = get_event_ids($this->time);
     $totalEvents = count($ids);
     $singleEventsArray = array();
     //This will save the single events in an array with the information rendered from the Events Manager Plugin
@@ -58,20 +73,18 @@ HTML;
         $singleEventFormat
       [/event]");
     }
-
-    // If there is a need to encapsulate HTML with divs, etc. concantenate the string and set it to $html here
-
-
+    return $singleEventArray;
   }
 
 
-
   /**
-   * Will return HTML format for the events
-   * @return string returns $html in stirng form
+   * This will format the entire grid html
    */
-  public function get_event_html() {
-    return $html;
+  private function form_grid_html() : void {
+    $eventsArray = $this->form_single_events_html();
+    // If there is a need to encapsulate HTML with divs, etc. concantenate the string and set it to $html here
+
+
   }
 
 }
