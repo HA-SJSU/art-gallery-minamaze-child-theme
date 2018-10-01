@@ -20,15 +20,15 @@ class EventGrid implements Event {
       <!-- Add the formated single event html here -->
       <div class="gallery_container">
         {has_image}
-        <img class="gallery_img" href=#_EVENTIMAGE
+          <img class="gallery_img" href=#_EVENTIMAGE
         {/has_image}
 
         {no_image}
-        <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
+          <img class="event-images" href="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
         {/no_image}
-        <div class="text-centered">
-          #_EVENTNAME
-        </div>
+          <div class="text-centered">
+            #_EVENTNAME
+          </div>
       </div>
 HTML;
   }

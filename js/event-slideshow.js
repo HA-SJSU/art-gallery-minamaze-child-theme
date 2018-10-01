@@ -37,7 +37,7 @@ function responsiveSlideshow(){
       let slideIndex = 1;
       showSlides(slideIndex);
     } else {
-
+      $(".mySlides").contents().unwrap();
     }
   });
 }
