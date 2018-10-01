@@ -90,10 +90,10 @@ function social_media_buttons(): void {
 
 
   /**
-   * This will display the pdf on the home page
+   * This will display the pdf on the home page, fill in the correct id
    * @param  integer $id THis is the page/post id for where the pdf page is in the SJSU Art Gallery Minamaze Theme
    */
-  function display_pdf( $id = 73 ) : void {
+  function display_pdf( $id = 1829 ) : void {
     $post = get_post($id);
     $content = $post->post_content;
     echo do_shortcode($content);

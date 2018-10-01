@@ -348,7 +348,10 @@ Slideshow
   width: 33%;
   display: inline-block;
   position:relative;
+}
 
+.full-event {
+  width: 100%;
 }
 
 .upcoming-event-section {
@@ -529,6 +532,78 @@ Queries
         padding-bottom: 20px;
     }
 }
+
+
+
+
+
+/*
+==============================================================================================================================
+==============================================================================================================================
+Archives Image Gallery
+==============================================================================================================================
+==============================================================================================================================
+*/
+
+.archives_gallery {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-flow: row wrap;
+}
+
+.gallery_container {
+  max-width: 33%;
+  padding: 10px 10px;
+  transition: all .2s ease-in-out;
+}
+
+.gallery_img {
+  height: 100%;
+  box-shadow: 11px 11px 32px 2px rgba(128,128,128,0.63);
+}
+
+.text-centered {
+  font-family: Verdana;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  bottom: 75%;
+  left: 18%;
+  color: white;
+  width: 200px;
+}
+
+.gallery_container:hover {
+  transform: scale(1.1);
+  opacity: 0.4;
+}
+
+.gallery_container:hover .text-centered {
+  opacity: 1;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .gallery_container {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .gallery_container {
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .gallery_container:hover {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 @media (min-width: 768px) {
 

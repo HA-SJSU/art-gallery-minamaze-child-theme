@@ -159,7 +159,7 @@ HTML;
    * This will format theslideshow html
    */
   private function form_slideshow_html() : void {
-    $startingDiv = "<div class='slideshow-container'><h2><i>UPCOMING EVENTS & EXHIBITIONS</i></h2>";
+    $startingDiv = "<div class='slideshow-container'>";
     $mySlides ="<div class='mySlides fade'>";
     $endOf_mySlides = "</div>";
     $button = '<a class="back" onclick="nextSlides(-1)">&#10094;</a>

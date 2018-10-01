@@ -18,7 +18,18 @@ class EventGrid implements Event {
       $this->singleEventFormat = <<< HTML
 
       <!-- Add the formated single event html here -->
+      <div class="gallery_container">
+        {has_image}
+        <img class="gallery_img" href=#_EVENTIMAGE
+        {/has_image}
 
+        {no_image}
+        <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
+        {/no_image}
+        <div class="text-centered">
+          #_EVENTNAME
+        </div>
+      </div>
 HTML;
   }
 
@@ -32,7 +43,7 @@ HTML;
    * @return array $ids Returns events ids of the selected
    */
   public function get_event_ids($time) {
-    $pastArray = array();
+    $ids = array();
     $events = EM_Events::get(
       array(
           'scope' => $time
@@ -63,17 +74,17 @@ HTML;
    * This will format the event and render through the Event Manager Plugin
    */
   private function form_single_events_html() {
-    $ids[] = get_event_ids($this->time);
+    $ids = $this->get_event_ids($this->time);
     $totalEvents = count($ids);
     $singleEventsArray = array();
     //This will save the single events in an array with the information rendered from the Events Manager Plugin
     for( $counter = 0; $counter < $totalEvents; $counter++) {
       $currentID = $ids[$counter];
       $singleEventsArray[] = do_shortcode("[event post_id='$currentID']
-        $singleEventFormat
+        $this->singleEventFormat
       [/event]");
     }
-    return $singleEventArray;
+    return $singleEventsArray;
   }
 
 
@@ -83,8 +94,23 @@ HTML;
   private function form_grid_html() : void {
     $eventsArray = $this->form_single_events_html();
     // If there is a need to encapsulate HTML with divs, etc. concantenate the string and set it to $html here
+    $parentDiv = '<div class="archives_gallery">';
+    $parentEndingDiv = '</div>';
 
+    $totalImages = count($eventsArray);
+    $galleryImages = "";
 
+    if($totalImages !== 0){
+      for( $imageCounter = 0; $imageCounter < $totalImages; $imageCounter++ ) {
+        $galleryImages .= $eventsArray[$imageCounter];
+      }
+    }
+
+    if($galleryImages === "") {
+      $this->html = "";
+    } else {
+      $this->html = $parentDiv . $galleryImages . $parentEndingDiv;
+    }
   }
 
 }

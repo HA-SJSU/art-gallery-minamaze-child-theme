@@ -1,5 +1,4 @@
-let slideIndex = 1;
-showSlides(slideIndex);// Next/previous controls
+
 
 function nextSlides(n) {
   showSlides(slideIndex += n);
@@ -30,10 +29,24 @@ function showSlides(n) {
  */
 function responsiveSlideshow(){
   jQuery(document).ready(function($){
-    if(screen.availWidth < 618) {
-      let parentNode = getElementsByClassName("slideshow-container");
-      let childNode = getElementsByClassName("")
-      // $(".slideshow-container").hide();
+    if($(window).width() < 620) {      // let parentNodeArray = document.getElementsByClassName("slideshow-container");
+      let events = document.getElementsByClassName("upcoming-event-section");
+      $(".mySlides").contents().unwrap();
+      $(".upcoming-event-section").wrap("<div class='mySlides fade'></div>");
+      $(".upcoming-event-section").removeClass("one-third-event");
+      let slideIndex = 1;
+      showSlides(slideIndex);
+    } else {
+
     }
   });
 }
+
+
+
+let slideIndex = 1;
+showSlides(slideIndex);// Next/previous controls
+responsiveSlideshow();
+jQuery(document).ready(function($){
+  $(window).resize(responsiveSlideshow);
+})

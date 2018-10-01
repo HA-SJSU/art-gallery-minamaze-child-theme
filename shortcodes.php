@@ -1,5 +1,4 @@
 <?php
-require_once('shortcodes.php');
 require_once('layout/EventGridClass.php');
 require_once('layout/EventSlideshowClass.php');
 /*
@@ -34,6 +33,6 @@ function display_event_grid() {
   return $html;
 }
 
-add_shortcode("event_galley","display_event_grid");
+add_shortcode("event_gallery","display_event_grid");
 
 ?>
