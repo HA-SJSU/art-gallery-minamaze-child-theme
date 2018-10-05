@@ -17,21 +17,34 @@ class EventGrid implements Event {
       $this->time = strtolower($time);
       $this->singleEventFormat = <<< HTML
 
-      <!-- Add the formated single event html here -->
-      <div class="gallery_container">
+      <figure class="gallery_container">
         {has_image}
           <img class="gallery_img" href=#_EVENTIMAGE
         {/has_image}
 
         {no_image}
-          <img class="event-images" href="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
+          <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
         {/no_image}
-          <div class="text-centered">
-            #_EVENTNAME
-          </div>
-      </div>
+        <figcaption class="gallery_text">
+          #_EVENTNAME
+        </figcaption>
+      </figure>
 HTML;
   }
+
+
+      // <div class="gallery_container">
+      //   {has_image}
+      //   <img class="gallery_img" href=#_EVENTIMAGE
+      //   {/has_image}
+
+      //   {no_image}
+      //   <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
+      //   {/no_image}
+      //   <div class="text-centered">
+      //     #_EVENTNAME
+      //   </div>
+      // </div>
 
 
 
@@ -64,10 +77,33 @@ HTML;
   public function get_event_html() {
     $this->form_grid_html();
     return $this->html;
+
+    // $cHtml = $this->archives_html();
+    // return $cHtml;
   }
 
+// private function archives_html() {
+//   $customHtml = do_shortcode('[events_list_grouped scope="past" date_format="F Y" limit="3" pagination=1]
+//       <div class="gallery_container">
+//         {has_image}
+//         <img class="gallery_img" href=#_EVENTIMAGE
+//         {/has_image}
 
+//         {no_image}
+//         <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
+//         {/no_image}
+//         <div class="text-centered">
+//           #_EVENTNAME
+//         </div>
+//       </div>
 
+//   [/events_list_grouped]');
+
+//   $parentDiv = '<div class="archives_gallery">';
+//   $parentEndingDiv = '</div>';
+//   $cusHtml = $parentDiv . $customHtml . $parentEndingDiv;
+//   return $cusHtml;
+// }
 
 
   /**
@@ -92,6 +128,7 @@ HTML;
    * This will format the entire grid html
    */
   private function form_grid_html() : void {
+
     $eventsArray = $this->form_single_events_html();
     // If there is a need to encapsulate HTML with divs, etc. concantenate the string and set it to $html here
     $parentDiv = '<div class="archives_gallery">';

@@ -18,7 +18,7 @@ class EventSlideshow implements Event {
       $this->time = $time;
       $this->singleEventFormat = <<< HTML
         <div class="one-third-event upcoming-event-section">
-          <a target="_blank" href=#_EVENTPAGEURL>
+          <a class="description" target="_blank" href="#_EVENTPAGEURL" alt="This goes to a new page for the #_EVENTNAME event">
             {has_image}
             <img class="event-images" href=#_EVENTIMAGE
             {/has_image}
@@ -41,7 +41,6 @@ class EventSlideshow implements Event {
             #_EVENTDATES<br>
             #_EVENTNAME</h4>
           </a>
-            <!-- <a target="_blank" href=#_EVENTPAGEURL>#_EVENTNAME</a></h4> -->
         </div>
 HTML;
 

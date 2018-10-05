@@ -25,19 +25,45 @@ function showSlides(n) {
 
 /**
  * This will change the slide depending on the size of the screen
- * @return {[type]} [description]
  */
 function responsiveSlideshow(){
   jQuery(document).ready(function($){
-    if($(window).width() < 620) {      // let parentNodeArray = document.getElementsByClassName("slideshow-container");
-      let events = document.getElementsByClassName("upcoming-event-section");
+    if($(window).width() < 620) {
       $(".mySlides").contents().unwrap();
       $(".upcoming-event-section").wrap("<div class='mySlides fade'></div>");
       $(".upcoming-event-section").removeClass("one-third-event");
-      let slideIndex = 1;
       showSlides(slideIndex);
     } else {
-      $(".mySlides").contents().unwrap();
+      let mySlidesDiv = document.getElementsByClassName("mySlides fade");
+      if(mySlidesDiv.length > 3) {
+          $(".upcoming-event-section").addClass("one-third-event");
+          $(".mySlides").contents().unwrap();
+          let events = document.getElementsByClassName("upcoming-event-section");
+          eventsLength = events.length;
+
+          let counter = 1;
+          let arrayOfHtml = [];
+          let innerHtml = "";
+          for(let i=0; i < eventsLength; i++,counter++) {
+            let formatHTML = "<div class='one-third-event upcoming-event-section'>" + events[i].innerHTML + "</div>";
+            innerHtml += formatHTML;
+            if(counter % 3 == 0) {
+              arrayOfHtml.push(innerHtml);
+              innerHtml="";
+            }
+          }
+          if(innerHtml != "")
+            arrayOfHtml.push(innerHtml); //This will pick up any left over divs if it's not an even set of 3
+          let length = arrayOfHtml.length;
+          for(let i = 0;i < length; i++){
+            $("<div class='mySlides fade'></div>").insertBefore(".back");
+          }
+          $(".upcoming-event-section").remove();
+          $(".mySlides").each(function(index,value){
+            $(this).wrapInner(arrayOfHtml[index]);
+          });
+          showSlides(slideIndex);
+      }
     }
   });
 }
@@ -48,5 +74,9 @@ let slideIndex = 1;
 showSlides(slideIndex);// Next/previous controls
 responsiveSlideshow();
 jQuery(document).ready(function($){
-  $(window).resize(responsiveSlideshow);
+  slideIndex = 1;
+  // $(window).resize(responsiveSlideshow());
+  $(window).resize(function() {
+    responsiveSlideshow();
+  });
 })
