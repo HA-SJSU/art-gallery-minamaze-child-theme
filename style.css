@@ -347,6 +347,7 @@ Slideshow
 
 .description {
   text-align:center;
+  color:grey !important;
 }
 
 .upcoming-event-section {
