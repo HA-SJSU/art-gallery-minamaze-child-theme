@@ -95,4 +95,4 @@
 		<?php /* Custom Intro */ thinkup_custom_intro(); ?>
 
 		<div id="main-core">
-			<?php if (is_front_page() or thinkup_check_ishome() ) /*Fetches PDF */ display_pdf(); ?>
+			<?php //if (is_front_page() or thinkup_check_ishome() ) /*Fetches PDF */ display_pdf(73); ?>

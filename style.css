@@ -53,11 +53,6 @@ button:hover {
     background: #E5A823 !important;
 }
 
-footer {
-  background:
-}
-
-
 .themebutton {
     background:#0055A2 !important;
 }
@@ -75,8 +70,9 @@ footer {
   border: none !important;
 }
 
+
 .nav-background {
-  background-color: #0857a3;
+  background-color: #0857a3 !important;
 }
 
 #header {
@@ -159,6 +155,7 @@ footer {
   background-color:#FFF;
   font-weight:bold;
 }
+
 /*
 .slider-full #header-core {
   max-width:60% ;
@@ -248,8 +245,6 @@ Line up events in 3's
   margin-bottom:2%;
   display:inline-block;
 }
-
-
 
 .list-item {
     border: 1px solid #ccc;
@@ -396,7 +391,8 @@ Slideshow
 
 /* On hover, add a black background color with a little bit see-through */
 .back:hover, .forward:hover {
-  background-color: rgba(0,0,0,1);
+  background-color: rgba(0,0,0,.8);
+  color: white;
 }
 
 /* Fading animation */
@@ -478,6 +474,7 @@ Queries
   .nav-background {
     background-color:transparent;
     position:fixed;
+    display:none;
   }
 }
 
@@ -573,7 +570,7 @@ Archives Image Gallery
 .gallery_img {
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: none;
   box-shadow: 11px 11px 32px 2px rgba(128,128,128,0.63);
 }
 

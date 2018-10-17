@@ -28,7 +28,7 @@ function showSlides(n) {
  */
 function responsiveSlideshow(){
   jQuery(document).ready(function($){
-    if($(window).width() < 620) {
+    if($(window).width() < 768) {
       $(".mySlides").contents().unwrap();
       $(".upcoming-event-section").wrap("<div class='mySlides fade'></div>");
       $(".upcoming-event-section").removeClass("one-third-event");
