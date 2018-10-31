@@ -17,38 +17,26 @@ class EventGrid implements Event {
       $this->time = strtolower($time);
       $this->singleEventFormat = <<< HTML
 
-      <figure class="gallery_container">
-        {has_image}
-          <img class="gallery_img" href=#_EVENTIMAGE
-        {/has_image}
+      <div class="gallery__box" onclick=window.open("#_EVENTURL")>
+        <div class="gallery__imgBox">
+          {has_image}
+            <img class="gallery__image" href=#_EVENTIMAGE
+          {/has_image}
 
-        {no_image}
-          <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
-        {/no_image}
-        <figcaption class="gallery_text">
-          #_EVENTNAME
-        </figcaption>
-      </figure>
+          {no_image}
+            <img class="gallery__image" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
+          {/no_image}
+        </div>
+        <div class="gallery__details">
+          <div class="gallery__details__content">
+            <p>
+              #_EVENTNAME
+            </p>
+          </div>  
+        </div>
+      </div>
 HTML;
   }
-
-
-      // <div class="gallery_container">
-      //   {has_image}
-      //   <img class="gallery_img" href=#_EVENTIMAGE
-      //   {/has_image}
-
-      //   {no_image}
-      //   <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
-      //   {/no_image}
-      //   <div class="text-centered">
-      //     #_EVENTNAME
-      //   </div>
-      // </div>
-
-
-
-
 
   /**
    * This will return the event ids needed for extracting information
@@ -67,44 +55,14 @@ HTML;
     return $ids;
   }
 
-
-
-
-  /**
+   /**
    * Will return HTML format for the events
    * @return string returns $html in stirng form
    */
-  public function get_event_html() {
-    $this->form_grid_html();
-    return $this->html;
-
-    // $cHtml = $this->archives_html();
-    // return $cHtml;
+  public function get_gallery_array() {
+    $galleryArray = $this->form_single_events_html();
+    return $galleryArray;
   }
-
-// private function archives_html() {
-//   $customHtml = do_shortcode('[events_list_grouped scope="past" date_format="F Y" limit="3" pagination=1]
-//       <div class="gallery_container">
-//         {has_image}
-//         <img class="gallery_img" href=#_EVENTIMAGE
-//         {/has_image}
-
-//         {no_image}
-//         <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
-//         {/no_image}
-//         <div class="text-centered">
-//           #_EVENTNAME
-//         </div>
-//       </div>
-
-//   [/events_list_grouped]');
-
-//   $parentDiv = '<div class="archives_gallery">';
-//   $parentEndingDiv = '</div>';
-//   $cusHtml = $parentDiv . $customHtml . $parentEndingDiv;
-//   return $cusHtml;
-// }
-
 
   /**
    * This will format the event and render through the Event Manager Plugin
@@ -123,37 +81,32 @@ HTML;
     return $singleEventsArray;
   }
 
+  /**
+   * Will return HTML format for the events
+   * @return string returns $html in stirng form
+   */
+  public function get_event_html() {
+    $this->form_grid_html();
+    return $this->html;
+  }
 
   /**
    * This will format the entire grid html
    */
   private function form_grid_html() : void {
 
-    $eventsArray = $this->form_single_events_html();
-    // If there is a need to encapsulate HTML with divs, etc. concantenate the string and set it to $html here
-    $parentDiv = '<div class="archives_gallery">';
-    $parentEndingDiv = '</div>';
+    // If there is a need to encapsulate HTML with divs, etc. 
+    // concantenate the string and set it to $html here
+    $galleryDiv = '<div id="gallery" class="gallery">';
+    $galleryEndingDiv = '</div>';
 
-    $totalImages = count($eventsArray);
-    $galleryImages = "";
+    $paginationDiv = '<div class="gallery_center">
+                          <a id="paginate" onclick="selectedImages(-1)" class="gallery_paginate">‹</a>
+                          <a id="paginate" onclick="selectedImages(1)" class="gallery_paginate">›</a>';
+    $paginationEndDiv = '</div>';
 
-    if($totalImages !== 0){
-      for( $imageCounter = 0; $imageCounter < $totalImages; $imageCounter++ ) {
-        $galleryImages .= $eventsArray[$imageCounter];
-      }
-    }
+    $this->html = $galleryDiv . $galleryEndingDiv . $paginationDiv . $paginationEndDiv;
 
-    if($galleryImages === "") {
-      $this->html = "";
-    } else {
-      $this->html = $parentDiv . $galleryImages . $parentEndingDiv;
-    }
   }
-
 }
-
-
-
-
-
 ?>

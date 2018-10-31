@@ -1,7 +1,8 @@
 <?php
 require_once('EventInterface.php');
 /**
- * This creates a slideshow to show on the front page
+ * This creates a slideshow to show on the front page, there must not be two slideshows or else the JavaScript
+ * will not function correctly.
  */
 class EventSlideshow implements Event {
   private $html;
@@ -15,6 +16,20 @@ class EventSlideshow implements Event {
    */
   public function __construct($time = "future") {
       $this->$html = "";
+      switch($time) {
+        case 'future':
+          $this->time = $time;
+          break;
+        case 'past':
+          $this->time = $time;
+          break;
+        case preg_match('[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-1][0-9]
+        ,[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]'):
+          $this->time = $time;
+          break;
+        default:
+          $this->time = 'future';
+      }
       $this->time = $time;
       $this->singleEventFormat = <<< HTML
         <div class="one-third-event upcoming-event-section">
@@ -154,8 +169,11 @@ HTML;
 
 
 
+
   /**
    * This will format theslideshow html
+   *
+   * @return void
    */
   private function form_slideshow_html() : void {
     $startingDiv = "<div class='slideshow-container'>";
