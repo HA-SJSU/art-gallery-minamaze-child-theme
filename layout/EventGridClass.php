@@ -32,6 +32,9 @@ class EventGrid implements Event {
             <p>
               #_EVENTNAME
             </p>
+            <p>
+              #_EVENTDATES
+            </p>
           </div>  
         </div>
       </div>
