@@ -14,8 +14,9 @@ class EventSlideshow implements Event {
    * @param string $time Accepts 'past' or 'future', refer to the Event Manager Documentation here:
    * https://wp-events-plugin.com/documentation/event-search-attributes/
    */
-  public function __construct($time = "future") {
+  public function __construct($time = "future",$order) {
       $this->$html = "";
+      $this->order ="";
       switch($time) {
         case 'future':
           $this->time = $time;
@@ -33,28 +34,19 @@ class EventSlideshow implements Event {
       $this->time = $time;
       $this->singleEventFormat = <<< HTML
         <div class="one-third-event upcoming-event-section">
-          <a class="description" target="_blank" href="#_EVENTPAGEURL" alt="This goes to a new page for the #_EVENTNAME event">
+          <a target="_blank" href="#_EVENTPAGEURL" alt="This goes to a new page for the #_EVENTNAME event">
             {has_image}
-            <img class="event-images" href=#_EVENTIMAGE
+            <img class="event-images" src="#_EVENTIMAGEURL">
             {/has_image}
 
             {no_image}
             <img class="event-images" src="http://events.ha.sjsu.edu/wp-content/uploads/2016/09/default_734x408_thumb.png">
             {/no_image}
 
-            {has_category_student-exhibition}
-            <h4 id="event-category" class="upcoming-events-font">Student Exhibition<br>
-            {/has_category_student-exhibition}
-
-            {has_category_thompson-gallery}
-            <h4 id="event-category" class="upcoming-events-font">Natalie & James Thompson Gallery<br>
-            {/has_category_thompson-gallery}
-
-            {has_category_tuesday-night-lecture}
-            <h4 id="event-category" class="upcoming-events-font">Tuesday Night Lecture<br>
-            {/has_category_tuesday-night-lecture}
-            #_EVENTDATES<br>
-            #_EVENTNAME</h4>
+            <h4 title="#_EVENTNAME" id="event-descriptions">
+              #_EVENTDATES<br>
+              #_EVENTNAME
+            </h4>
           </a>
         </div>
 HTML;
@@ -72,7 +64,7 @@ HTML;
    * https://wp-events-plugin.com/documentation/event-search-attributes/
    * @return array $ids Return event ids from all categories
    */
-  public function get_event_ids($time) {
+  public function get_event_ids($time,$order) {
     $ids = array();
     $studentIDS = array();
     $thompsonIDS = array();
@@ -80,7 +72,7 @@ HTML;
     $student = EM_Events::get(
       array(
         'scope'=> $time,
-        'order' => 'ASC',
+        'order' => $order,
         'limit' => 6,
         'category' => 'student-exhibition'
     ));
@@ -93,7 +85,7 @@ HTML;
     $thompson = EM_Events::get(
       array(
         'scope'=> $time,
-        'order' => 'ASC',
+        'order' => $order,
         'limit' => 3,
         'category' => 'thompson-gallery'
       ));
@@ -105,7 +97,7 @@ HTML;
     $tuesday = EM_Events::get(
       array(
         'scope'=> $time,
-        'order' => 'ASC',
+        'order' => $order,
         'limit' => 3,
         'category' => 'tuesday-night-lecture'
       ));
@@ -142,7 +134,7 @@ HTML;
    */
   private function form_single_events_html() {
     $eventsArray = array();
-    $ids = $this->get_event_ids($this->time);
+    $ids = $this->get_event_ids($this->time, $this->order);
     //This loop checks for 9 events
     for( $counter = 0; $counter < 3; $counter++ ) {
         for($innerCounter = 0 ; $innerCounter < 3; $innerCounter++) {

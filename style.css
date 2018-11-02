@@ -345,14 +345,16 @@ Slideshow
   position:relative;
 }
 
-.description {
-  text-align:center;
-  color:grey !important;
+#event-descriptions{
+    height: 100px;
+    text-align:center;
+    overflow:hidden;
+    color:grey !important;
 }
 
 .upcoming-event-section {
   padding: 5px;
-  overflow:auto;
+  overflow:hidden;
   max-height: 530px;
 }
 
@@ -368,6 +370,9 @@ Slideshow
   object-fit: cover;
   background-color: #f6f6f6;
 }
+
+
+
 /* Next & previous buttons */
 .back, .forward {
   cursor: pointer;
@@ -484,7 +489,8 @@ Archives Image Gallery
     transform: translateY(-50%);
     text-align: center;
     padding: 15px;
-    
+    width: 100%;
+
   }
   
   .gallery__details__content p {

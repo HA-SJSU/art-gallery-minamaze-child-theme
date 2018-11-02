@@ -35,7 +35,7 @@ function responsiveSlideshow(){
       showSlides(slideIndex);
     } else {
       let mySlidesDiv = document.getElementsByClassName("mySlides fade");
-      if(mySlidesDiv.length > 3) {
+      if(mySlidesDiv.length >= 3) {
           $(".upcoming-event-section").addClass("one-third-event");
           $(".mySlides").contents().unwrap();
           let events = document.getElementsByClassName("upcoming-event-section");

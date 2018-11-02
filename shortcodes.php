@@ -14,9 +14,10 @@ SHORTCODES USED FOR THE SITE
  */
 function display_event_slideshow( $atts, $content = null ) {
   $a = shortcode_atts( array(
-    'time' => 'future'
+    'time' => 'future',
+    'order' => 'ASC'
   ), $atts, 'event_slideshow');
-  $slideshow = new EventSlideshow($a['time']);
+  $slideshow = new EventSlideshow($a['time'],$a['order']);
   $html = $slideshow -> get_event_html();
   return $html;
 }
@@ -32,9 +33,10 @@ add_shortcode("event_slideshow","display_event_slideshow");
  */
 function display_event_grid( $atts, $content = null ) {
   $a = shortcode_atts( array(
-    'time' => 'future'
+    'time' => 'future',
+    'order' => 'DESC'
   ), $atts, 'event_slideshow');
-  $grid = new EventGrid($a['time']);
+  $grid = new EventGrid($a['time'],$a['order']);
   $html = $grid -> get_event_html();
   return $html;
 }
