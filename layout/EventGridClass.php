@@ -13,10 +13,11 @@ class EventGrid implements Event {
    *  This will initialize the class with a default grid
    * @param string $time This will choose the timeline for the event
    */
-  public function __construct($time = "past",$order ="ASC") {
+  public function __construct($time = "past",$order ="DESC", $orderby="event_start_date") {
       $this->html = "";
       $this->time = strtolower($time);
       $this->order = $order;
+      $this->orderby = $orderby;
       $this->singleEventFormat = <<< HTML
 
       <div class="gallery__box" onclick=window.open("#_EVENTURL")>
@@ -48,12 +49,13 @@ HTML;
    * from EVENT MANAGER
    * @return array $ids Returns events ids of the selected
    */
-  public function get_event_ids($time,$order) {
+  public function get_event_ids($time,$order,$orderby) {
     $ids = array();
     $events = EM_Events::get(
       array(
           'scope' => $time,
-          'order' => $order
+          'order' => $order,
+          'orderby' => $orderby
       ));
       foreach($events as $key => $eventObjects) {
         $ids[] = $eventObjects -> post_id;
@@ -74,7 +76,7 @@ HTML;
    * This will format the event and render through the Event Manager Plugin
    */
   private function form_single_events_html() {
-    $ids = $this->get_event_ids($this->time, $this->order);
+    $ids = $this->get_event_ids($this->time, $this->order, $this->orderby);
     $totalEvents = count($ids);
     $singleEventsArray = array();
     //This will save the single events in an array with the information rendered from the Events Manager Plugin

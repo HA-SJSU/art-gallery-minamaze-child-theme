@@ -14,9 +14,10 @@ class EventSlideshow implements Event {
    * @param string $time Accepts 'past' or 'future', refer to the Event Manager Documentation here:
    * https://wp-events-plugin.com/documentation/event-search-attributes/
    */
-  public function __construct($time = "future",$order) {
+  public function __construct($time = "future",$order,$orderby) {
       $this->$html = "";
       $this->order ="";
+      $this->orderby = "";
       switch($time) {
         case 'future':
           $this->time = $time;
@@ -64,7 +65,7 @@ HTML;
    * https://wp-events-plugin.com/documentation/event-search-attributes/
    * @return array $ids Return event ids from all categories
    */
-  public function get_event_ids($time,$order) {
+  public function get_event_ids($time,$order,$orderby) {
     $ids = array();
     $studentIDS = array();
     $thompsonIDS = array();
@@ -134,7 +135,7 @@ HTML;
    */
   private function form_single_events_html() {
     $eventsArray = array();
-    $ids = $this->get_event_ids($this->time, $this->order);
+    $ids = $this->get_event_ids($this->time, $this->order, $this->orderby);
     //This loop checks for 9 events
     for( $counter = 0; $counter < 3; $counter++ ) {
         for($innerCounter = 0 ; $innerCounter < 3; $innerCounter++) {
