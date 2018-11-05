@@ -1,18 +1,13 @@
 <?php
 require_once('EventInterface.php');
-/**
- * This creates a grid to show in the Archives page
- */
+
 class EventGrid implements Event {
   private $html;
   private $time;
   private $singleEventFormat;
   private $order;
 
-  /**
-   *  This will initialize the class with a default grid
-   * @param string $time This will choose the timeline for the event
-   */
+
   public function __construct($time = "past",$order ="DESC", $orderby="event_start_date") {
       $this->html = "";
       $this->time = strtolower($time);
@@ -38,17 +33,13 @@ class EventGrid implements Event {
             <p>
               #_EVENTDATES
             </p>
-          </div>  
+          </div>
         </div>
       </div>
 HTML;
   }
 
-  /**
-   * This will return the event ids needed for extracting information
-   * from EVENT MANAGER
-   * @return array $ids Returns events ids of the selected
-   */
+
   public function get_event_ids($time,$order,$orderby) {
     $ids = array();
     $events = EM_Events::get(
@@ -63,18 +54,17 @@ HTML;
     return $ids;
   }
 
-   /**
-   * Will return HTML format for the events
-   * @return string returns $html in stirng form
-   */
+
+
   public function get_gallery_array() {
     $galleryArray = $this->form_single_events_html();
     return $galleryArray;
   }
 
-  /**
-   * This will format the event and render through the Event Manager Plugin
-   */
+
+
+
+
   private function form_single_events_html() {
     $ids = $this->get_event_ids($this->time, $this->order, $this->orderby);
     $totalEvents = count($ids);
@@ -89,22 +79,22 @@ HTML;
     return $singleEventsArray;
   }
 
-  /**
-   * Will return HTML format for the events
-   * @return string returns $html in stirng form
-   */
+
+
+
+
+
   public function get_event_html() {
     $this->form_grid_html();
     return $this->html;
   }
 
-  /**
-   * This will format the entire grid html
-   */
+
+
+
   private function form_grid_html() : void {
 
-    // If there is a need to encapsulate HTML with divs, etc. 
-    // concantenate the string and set it to $html here
+
     $galleryDiv = '<div id="gallery" class="gallery">';
     $galleryEndingDiv = '</div>';
 

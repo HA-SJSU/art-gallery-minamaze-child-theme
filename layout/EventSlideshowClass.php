@@ -1,19 +1,12 @@
 <?php
 require_once('EventInterface.php');
-/**
- * This creates a slideshow to show on the front page, there must not be two slideshows or else the JavaScript
- * will not function correctly.
- */
+
 class EventSlideshow implements Event {
   private $html;
   private $time;
   private $singleEventFormat;
 
-  /**
-   * This will initialize the class with a default slideshow
-   * @param string $time Accepts 'past' or 'future', refer to the Event Manager Documentation here:
-   * https://wp-events-plugin.com/documentation/event-search-attributes/
-   */
+
   public function __construct($time = "future",$order,$orderby) {
       $this->$html = "";
       $this->order ="";
@@ -58,13 +51,7 @@ HTML;
 
 
 
-  /**
-   * This will return the event ids needed for extracting information
-   * from EVENT MANAGER
-   * @param string $time Accepts 'past' or 'future', refer to the Event Manager Documentation here:
-   * https://wp-events-plugin.com/documentation/event-search-attributes/
-   * @return array $ids Return event ids from all categories
-   */
+
   public function get_event_ids($time,$order,$orderby) {
     $ids = array();
     $studentIDS = array();
@@ -117,10 +104,7 @@ HTML;
 
 
 
-  /**
-  * Will return HTML format for the events
-  * @return string This will return the html
-  */
+
   public function get_event_html() {
     $this-> form_slideshow_html();
     return $this->html;
@@ -129,10 +113,7 @@ HTML;
 
 
 
-  /**
-   * This will get all the single events html into an array
-   * @return array $eventsArray has all the html of the formatted single events
-   */
+
   private function form_single_events_html() {
     $eventsArray = array();
     $ids = $this->get_event_ids($this->time, $this->order, $this->orderby);
@@ -148,7 +129,6 @@ HTML;
         }
     }
 
-    //If there are still extra slots in the slideshow, put student exhibitions in for the rest
     $currentStudentEvent = 3;
     while(count($eventsArray) < 9) {
       $currentID = $ids[2][$currentStudentEvent];
@@ -163,11 +143,7 @@ HTML;
 
 
 
-  /**
-   * This will format theslideshow html
-   *
-   * @return void
-   */
+
   private function form_slideshow_html() : void {
     $startingDiv = "<div class='slideshow-container'>";
     $mySlides ="<div class='mySlides fade'>";

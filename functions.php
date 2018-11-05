@@ -34,13 +34,10 @@
 
 
 
-  // Adds event-grid.js to the wordpress.
   wp_enqueue_script( 'event-grid', get_stylesheet_directory_uri() . '/js/event-grid.js' );
 
-  // Fetches gallery images from the EventGridClass.php
   $galleryArray = fetchGalleryImages();
 
-  // Function to fetch the HTML gallery images from the EventGridClass.php - past events.
   function fetchGalleryImages() {
     $grid = new EventGrid("past");
     $galleryArray = $grid -> get_gallery_array();
@@ -61,7 +58,6 @@
    * This will load the scripts at the footer
    */
   function footer_javascripts() : void {
-    //get_stylesheet_directory_uri() gets the directory of the childtheme at the root
     echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-grid.js"></script>' . "\n";
     if( is_front_page() or thinkup_check_ishome()) { //This will load the event-slideshow.js on select pages only
       echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-slideshow.js"></script>' . "\n";
@@ -114,10 +110,6 @@ function social_media_buttons(): void {
 }
 
 
-  /**
-   * This will display the pdf on the home page, fill in the correct id - original 1829
-   * @param  integer $id THis is the page/post id for where the pdf page is in the Gallery Minamaze Theme
-   */
   function display_pdf( $id =1829 ) : void {
     $post = get_post($id);
     $content = $post->post_content;
