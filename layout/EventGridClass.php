@@ -38,7 +38,7 @@ class EventGrid implements Event {
             <p>
               #_EVENTDATES
             </p>
-          </div>  
+          </div>
         </div>
       </div>
 HTML;
@@ -103,7 +103,7 @@ HTML;
    */
   private function form_grid_html() : void {
 
-    // If there is a need to encapsulate HTML with divs, etc. 
+    // If there is a need to encapsulate HTML with divs, etc.
     // concantenate the string and set it to $html here
     $galleryDiv = '<div id="gallery" class="gallery">';
     $galleryEndingDiv = '</div>';
@@ -117,4 +117,11 @@ HTML;
 
   }
 }
+
+
+
+array(
+
+  'people' => 'what'
+)
 ?>
