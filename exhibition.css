@@ -1,0 +1,106 @@
+.leftbar{
+	left:40px;
+	top: 100px;
+	width: 250px;
+	min-width: 200px;
+	border: 3px outset;
+	overflow-y: auto;
+	min-height: 50%;
+}
+
+.container{
+	top: 150px;
+}
+
+.well {
+	background-color: #D3D3D3;
+	overflow-y: auto;
+	width: 300px;
+max-height: 600px;
+left: 20px;
+top: 80px;
+margin-top: 70px;
+margin-left:40px;
+
+}
+
+.navbar-brand{
+	font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+font-size: 32px;
+color: #ffffff;
+margin-left: 150PX;
+}
+
+
+
+.col-md-6{
+	 width: 1000px;
+    background-color: #D3D3D3;
+    margin-top: 70px;
+    border:2px outset;
+}
+
+
+#first{
+	 width: 400px;
+    float: left;
+    height: 300px;
+}
+
+.image{
+	    border: 2px outset;
+	    margin-top: 20px;
+	    margin-left: 20px;
+}
+
+#second{
+	    width: 500px;
+    float: right;
+    height: 300px;
+}
+
+.middle{
+border: 1px solid;
+
+
+background: #C4C4C4;
+}
+
+.logo{
+	width: 200px;
+	height: 50px;
+}
+
+.navbar-collapse{
+	background-color: #0055A2;
+	color: black;
+	width: 1300px;
+	    margin-right: 0;
+    margin-left: 50;	
+}
+
+.navbar>.container-fluid .navbar-brand {
+    margin-left: 45px;
+}
+
+.container-fluid>.navbar-collapse{
+	        margin-right: 0;
+    margin-left: 47;
+}
+
+.media-body{
+	margin-top: 500px;
+	left:500px
+
+	max-width: 60%;
+	background-color: #121212;
+}
+
+.picture{
+	margin-left: 200px;
+	margin-top: 200px;
+	border: 1px solid;
+}
