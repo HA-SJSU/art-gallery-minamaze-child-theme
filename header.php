@@ -111,6 +111,8 @@ HTML;
 	$ag_front_page_featuring_mas = get_theme_mod('ag_front_page_featuring_mas');
 	$ag_front_page_fb = get_theme_mod('ag_front_page_flipbook');
 
+	
+
 	$masters_works = <<<HTML
 	<div class="row">
 		<div class="col-md-12">
@@ -124,21 +126,23 @@ HTML;
 	</div>
 HTML;
 
+		$nt_html_featuring_text = '	<div class="row">
+		<div class="col-md-12">
+			<h1 id="ag-front-page-featuring-text">' .$nt_featuring_text .'</h1>
+		</div>   
+	</div>';
+
 	   echo '<div class="container-fluid">';
-	   echo '	<div class="row">
-	   <div class="col-md-12">
-		   <h1 id="ag-front-page-featuring-text">' .$nt_featuring_text .'</h1>
-	   </div>   
-   </div>';
+	   
 	   if($front_options != ""){ //This will choose what to open depending on what they have selected
 		   switch($front_options){
 			   
 			   case 'Featured&Slideshow':
-					echo $featured_main_event . $slideshow;
+					echo $nt_html_featuring_text . $featured_main_event . $slideshow;
 					break;
 
 				case 'Slideshow&Masters':
-					echo $slideshow . $masters_works;
+					echo $nt_html_featuring_text . $slideshow . $masters_works;
 					break;
 
 				case 'Masters&Featured':
@@ -146,11 +150,11 @@ HTML;
 				break;
 
 				case 'Featured':
-					echo $featured_main_event;
+					echo $nt_html_featuring_text . $featured_main_event;
 				break;
 
 				case 'Slideshow':
-					echo $slideshow;
+					echo $nt_html_featuring_text . $slideshow;
 					break;
 
 				case 'Masters':
@@ -158,7 +162,7 @@ HTML;
 					break;
 					
 				case 'All':
-					echo $featured_main_event . $slideshow . $masters_works;
+					echo $nt_html_featuring_text . $featured_main_event . $slideshow . $masters_works;
 					break;
 				default:
 

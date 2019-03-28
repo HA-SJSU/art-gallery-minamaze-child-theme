@@ -143,7 +143,7 @@ function art_gallery_customize_register( $wp_customize ){
     )));
 
     $wp_customize->add_control(new WP_Customize_Control($wp_customize,'ag_front_page_flipbook',array(
-      'description' => esc_html__('Add the embedded Flipsnack, embedded pdf, etc. here. Do not put malicious urls here please. GTML can be placed here.'),
+      'description' => esc_html__('Add the embedded Flipsnack, embedded pdf, etc. here. Do not put malicious urls here please. HTML can be placed here.'),
       'section' => 'art_gallery_options',
       'settings' => 'ag_front_page_flipbook',
       'type' => 'textarea'
