@@ -1,6 +1,10 @@
 <?php
+/**
+ * Edited by Vivian Hoang, Suhas Hunsimar
+ */
   require_once('shortcodes.php');
   require_once('layout/EventGridClass.php');
+  require_once(get_stylesheet_directory().'/inc/ag_customizer.php'); //This will get the customizer functions for the child theme
 
   /**
    * This allows the child theme to be intialized as well as loop through all the parent theme's css files
@@ -8,29 +12,36 @@
    */
   function my_theme_enqueue_styles() : void {
 
-      $parent_style = 'minamaze-style'; // This is 'twentyfifteen-style' for the Twenty Fifteen theme.
+      $parent_style = 'minamaze-style'; // This is the parent theme.
 
-      wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
+      wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' ); //This is necessary to have the parents css included
       wp_enqueue_style( 'child-style',
           get_stylesheet_directory_uri() . '/style.css',
           array( $parent_style ),
           wp_get_theme()->get('Version')
       );
+      wp_enqueue_style( 'bootstrap4cdn' , "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css");
+      wp_enqueue_style('fontawesome',"https://use.fontawesome.com/releases/v5.6.3/css/all.css");
   }
   add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
 
 
+
   /**
-   * This will load the scripts at the header
+   * This will load the scripts at the header (the improper way to add javascript to WordPress)
    */
   function ha_custom_javascripts() : void {
   		echo '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
   		echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>';
-  	  echo '<script type="text/javascript" src="' . get_stylesheet_directory_uri() . '/js/ha-custom.js"></script>' . "\n";
+      echo '<script type="text/javascript" src="' . get_stylesheet_directory_uri() . '/js/ha-custom.js"></script>' . "\n";
+      
   	}
   add_action( 'wp_head', 'ha_custom_javascripts' );
 
+
+
+  
 
 
 
@@ -70,7 +81,27 @@
   add_action( 'wp_footer', 'footer_javascripts' );
 
 
+/*
+========================================================================================================================================================================
+CUSTOMIZABLE FUNCTIONS USED FOR THE SITE
 
+
+
+
+
+
+========================================================================================================================================================================
+*/
+
+/**
+ * Check if EM_Events class exists
+ * @return void
+ */
+function ag_front_page_html(){
+  if( class_exists('EM_Events')){ //This will prevent from the page fromt breaking down if plugin 'Events Manager' is not installed.
+    return display_event_slideshow(['time' => 'future']);
+  }
+}
 
 
 /*

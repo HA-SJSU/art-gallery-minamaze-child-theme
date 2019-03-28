@@ -143,11 +143,13 @@ button:hover {
     position: relative;
 }
 
-#body-core {
+/* #body-core {
+    margin:0 auto;
+    max-width: 1200px;
     min-height: 900px;
     position: relative;
     height: 100%;
-}
+} */
 
 #no-results {
     display:none;
@@ -532,8 +534,16 @@ Archives Image Gallery
     top:1px;
   }
 
+  
+/*
+==============================================================================================================================
+WordPress Customizable styles Front Page
+==============================================================================================================================
+*/
 
-
+.border-10 {
+  border-width:10px !important;
+}
 
 
 
@@ -549,6 +559,9 @@ Queries
 ==============================================================================================================================
 */
 @media (max-width:400px) {
+    iframe {
+      min-height: 300px;
+    }
     .smd-post-content {
         width:100%;
         float:none;
@@ -591,6 +604,9 @@ Queries
 }
 
 @media (max-width: 767px) {
+  iframe {
+    min-height: 500px;
+  }
 
   #header .header-links > ul > li a {
     color: transparent;
@@ -654,6 +670,9 @@ Queries
 }
 
 @media (min-width: 768px) {
+    iframe {
+      min-height: 700px;
+    }
 
     .view-action {
         display: inline-block;
