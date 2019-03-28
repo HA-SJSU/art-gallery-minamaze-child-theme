@@ -94,12 +94,11 @@ CUSTOMIZABLE FUNCTIONS USED FOR THE SITE
 */
 
 /**
- * Undocumented function
- *
+ * Check if EM_Events class exists
  * @return void
  */
 function ag_front_page_html(){
-  if( class_exists('EM_Events')){ //This will prevent from the page fromt breaking down if something breaks
+  if( class_exists('EM_Events')){ //This will prevent from the page fromt breaking down if plugin 'Events Manager' is not installed.
     return display_event_slideshow(['time' => 'future']);
   }
 }
