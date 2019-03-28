@@ -79,29 +79,97 @@
 	<!-- header -->
 
 
-		<div id="main-core">
 <?php
    if (is_front_page() or thinkup_check_ishome()) {
+	   $front_options = get_option('ag_front_page_display_options');
+	//    var_dump($front_options);
+
+	$nt_featuring_text = get_theme_mod('ag_front_page_featuring_text');
+	$nt_ex_name =  get_theme_mod('nt_exhibit_name');
+	$nt_title = get_theme_mod('nt_title');
+	$nt_caption = get_theme_mod('nt_caption');
+	$nt_img = '"'. get_theme_mod('nt_exhibition_featured_image_upload') . '"';
+
+	$featured_main_event = <<<HTML
+
+   <div class="row align-middle">
+	   <div class="col-md-8 border-10">
+		   <img id="nt-featured-img" src=$nt_img/>
+	   </div>
+	   <div class="col-md-4 border border-10">
+		   <div>
+			   <h1 id="nt-exhibit-name">$nt_ex_name</h1>
+			   <h2 id="nt-title"> $nt_title</h2>
+			   <p id="nt-caption">$nt_caption</p>
+		   </div>
+	   </div>
+   </div>
+HTML;
+
+
+	$slideshow = '<div class="row"><div class="col-md-12">'. ag_front_page_html() . '</div></div>';
+	$ag_front_page_featuring_mas = get_theme_mod('ag_front_page_featuring_mas');
+	$ag_front_page_fb = get_theme_mod('ag_front_page_flipbook');
+
+	$masters_works = <<<HTML
+	<div class="row">
+		<div class="col-md-12">
+			<h1 id="ag-front-page-featuring-mas">$ag_front_page_featuring_mas</h1>
+		</div>   
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			$ag_front_page_fb
+		</div>   
+	</div>
+HTML;
+
+	   echo '<div class="container-fluid">';
+	   echo '	<div class="row">
+	   <div class="col-md-12">
+		   <h1 id="ag-front-page-featuring-text">' .$nt_featuring_text .'</h1>
+	   </div>   
+   </div>';
+	   if($front_options != ""){ //This will choose what to open depending on what they have selected
+		   switch($front_options){
+			   
+			   case 'Featured&Slideshow':
+					echo $featured_main_event . $slideshow;
+					break;
+
+				case 'Slideshow&Masters':
+					echo $slideshow . $masters_works;
+					break;
+
+				case 'Masters&Featured':
+					echo $featured_main_event . $masters_works;
+				break;
+
+				case 'Featured':
+					echo $featured_main_event;
+				break;
+
+				case 'Slideshow':
+					echo $slideshow;
+					break;
+
+				case 'Masters':
+					echo $masters_works;
+					break;
+					
+				case 'All':
+					echo $featured_main_event . $slideshow . $masters_works;
+					break;
+				default:
+
+		   }
+	   }
+	   echo '</div>';
 	   ?>
-	   <div class="container-fluid">
-			<div class="row">
-				<div class="col-md-8">
-					<img id="nt-featured-img" src="<?php echo get_theme_mod('nt_exhibition_featured_image_upload')?>"/>
-				</div>
-				<div class="col-md-4">
-					<h1>Natalie and Thompson Event</h1>
-					<p><?php echo get_theme_mod('nt_caption')?> </p>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-md-12">
-					<img src="<?php echo get_theme_mod('nt_exhibition_featured_image_upload')?>"/>
-				</div>
-			</div> -->
-   		</div>
+	  
 		<?php
 	}
-?>
+	?>
 	
 
 	<!-- Ending Upcoming Events Section -->
@@ -113,5 +181,6 @@
 	<div id="content-core">
 
 		<div id="main">
+		<div id="main-core">
 		<?php /* Custom Intro */thinkup_custom_intro();?>
 

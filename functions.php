@@ -99,33 +99,10 @@ CUSTOMIZABLE FUNCTIONS USED FOR THE SITE
  * @return void
  */
 function ag_front_page_html(){
-  do_action('ag_front_page_html');
-  echo display_event_slideshow(['time' => 'future']);
-  display_pdf();
+  if( class_exists('EM_Events')){ //This will prevent from the page fromt breaking down if something breaks
+    return display_event_slideshow(['time' => 'future']);
+  }
 }
-
-
-// if ( ! function_exists( 'ag_customizer_setup' ) ) :
-
-// /
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
