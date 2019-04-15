@@ -8,6 +8,7 @@ class EventGrid implements Event {
   private $time;
   private $singleEventFormat;
   private $order;
+  private $orderby;
 
   /**
    *  This will initialize the class with a default grid
