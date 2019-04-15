@@ -545,7 +545,9 @@ WordPress Customizable styles Front Page
   border-width:10px !important;
 }
 
-
+#ag-front-page-featuring-text, #ag-front-page-featuring-mas {
+  font-size: 4em;
+}
 
 
 

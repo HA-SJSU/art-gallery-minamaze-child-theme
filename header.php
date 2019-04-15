@@ -106,12 +106,14 @@
    </div>
 HTML;
 
+// $slideshow = '<div id="main-slideshow" class="row"><div class="col-md-12">'. ag_front_page_html() . '</div></div>';
 
-	$slideshow = '<div class="row"><div class="col-md-12">'. ag_front_page_html() . '</div></div>';
+	$slideshow = '<div id="main-slideshow" class="row"><div class="col-md-12">'. '</div></div>';
 	$ag_front_page_featuring_mas = get_theme_mod('ag_front_page_featuring_mas');
 	$ag_front_page_fb = get_theme_mod('ag_front_page_flipbook');
 
-	
+
+	// echo slides();
 
 	$masters_works = <<<HTML
 	<div class="row">
@@ -170,7 +172,7 @@ HTML;
 	   }
 	   echo '</div>';
 	   ?>
-	  
+	  (
 		<?php
 	}
 	?>
@@ -187,4 +189,5 @@ HTML;
 		<div id="main">
 		<div id="main-core">
 		<?php /* Custom Intro */thinkup_custom_intro();?>
+		
 

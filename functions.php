@@ -4,6 +4,7 @@
  */
   require_once('shortcodes.php');
   require_once('layout/EventGridClass.php');
+  require_once('layout/EventInfo.php');
   require_once(get_stylesheet_directory().'/inc/ag_customizer.php'); //This will get the customizer functions for the child theme
 
   /**
@@ -66,16 +67,42 @@
 
 
 
+    
+    
+
+  wp_enqueue_script( 'Event-Slides', get_stylesheet_directory_uri() . '/js/event-grid.js' );
+
+  /**
+   * This will return information of the event in JSON format
+   *
+   * @return void
+   */
+  function fetchGalleryJSON() {
+    $info = new EventInfo("past");
+    $eventsArray = $info -> getJSON();
+    return $eventsArray;
+  }
+
+  $eventsArray = fetchGalleryJSON();
+  
+
+  wp_localize_script('Event-Slides', 'eventsArray', $eventsArray);
+
+
+
 
 
   /**
    * This will load the scripts at the footer
    */
   function footer_javascripts() : void {
-    //get_stylesheet_directory_uri() gets the directory of the childtheme at the root
-    echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-grid.js"></script>' . "\n";
-    if( is_front_page() or thinkup_check_ishome()) { //This will load the event-slideshow.js on select pages only
-      echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-slideshow.js"></script>' . "\n";
+    if(class_exists('EM_Events')){
+        //get_stylesheet_directory_uri() gets the directory of the childtheme at the root
+        echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-grid.js"></script>' . "\n";
+        if( is_front_page() or thinkup_check_ishome()) { //This will load the event-slideshow.js on select pages only
+          echo '<script src="' . get_stylesheet_directory_uri() . '/js/event-slideshow.js"></script>' . "\n";
+          echo '<script src="' . get_stylesheet_directory_uri() . '/js/Event-Slides.js"></script>' . "\n";
+        }
     }
   }
   add_action( 'wp_footer', 'footer_javascripts' );
@@ -100,6 +127,12 @@ CUSTOMIZABLE FUNCTIONS USED FOR THE SITE
 function ag_front_page_html(){
   if( class_exists('EM_Events')){ //This will prevent from the page fromt breaking down if plugin 'Events Manager' is not installed.
     return display_event_slideshow(['time' => 'future']);
+  }
+}
+
+function slides(){
+  if( class_exists('EM_Events')){ //This will prevent from the page fromt breaking down if plugin 'Events Manager' is not installed.
+    return display_event_slides(['time' => 'future']);
   }
 }
 
@@ -149,11 +182,11 @@ function social_media_buttons(): void {
    * This will display the pdf on the home page, fill in the correct id - original 1829
    * @param  integer $id THis is the page/post id for where the pdf page is in the Gallery Minamaze Theme
    */
-  function display_pdf( $id =1829 ) : void {
-    $post = get_post($id);
-    $content = $post->post_content;
-    echo do_shortcode($content);
-  }
+  // function display_pdf( $id =1829 ) : void {
+  //   $post = get_post($id);
+  //   $content = $post->post_content;
+  //   echo do_shortcode($content);
+  // }
 
 
 
