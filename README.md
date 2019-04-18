@@ -2,3 +2,4 @@
 This is a repository for an organization's website.
 
 ## Plugins Needed (Mandatory)
+Refer to wiki page
